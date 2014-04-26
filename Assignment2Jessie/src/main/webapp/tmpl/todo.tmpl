@@ -1,0 +1,16 @@
+<script type="text/template" id="member-tmpl">
+	<% var addHeader = true;
+	_.each(members, function(member) { 
+	    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+	        addHeader = true;
+	    }
+	    %>
+		<div class="row member">
+			<div class="col"><% if ( addHeader ) { %><div class="head">Id</div><% } %><div class="data"><%=todo.id%></div></div>
+			<div class="col"><% if ( addHeader ) { %><div class="head">Name</div><% } %><div class="data"><%=todo.name%></div></div>
+			<div class="col"><% if ( addHeader ) { %><div class="head">Description</div><% } %><div class="data"><%=todo.description%></div></div>
+			<div class="col"><% if ( addHeader ) { %><div class="head">REST URL</div><% } %><div class="data"><a href="rest/todos/<%=member.id%>" rel="external" target="_blank" class="resturl ui-link">JSON</a></div></div>
+		</div>
+	<% addHeader = false;
+	}); %>
+</script>

@@ -1,0 +1,53 @@
+﻿.heading {
+//	color:white;
+	text-align:center;
+	font-size:large;
+}
+
+.body{
+	background-color:#CC99FF;
+	text-align:center;
+	font-family:"Comic Sans MS";
+}
+
+.button {
+//	margin-left:300px;
+	margin-right:auto;
+	color:white;
+	background-color: #9900FF;
+}
+
+.logging{
+	text-align:right;
+	margin-top:5px;
+	margin-bottom:auto;
+	margin-left:auto;
+	margin-right:7px;
+}
+
+.form{
+	text-align:center;
+	background-color:#6699FF;
+	padding-top:20px;
+	padding-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:436px;
+	border:7px;
+	border-style:solid;
+	border-color:#99CCFF;
+}
+
+.table{
+	text-align:center;
+	margin:auto auto auto auto;
+	border-style:inset;
+	border-color:#99CCFF;
+	background:#6699FF;
+	border-width:7px;
+	table-layout:auto;
+}
+
+.insideTable{
+	background:#CC99FF;
+}

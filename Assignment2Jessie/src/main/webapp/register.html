@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Assignment2 - Dist Sys and Web Tech - Jessie</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
+		<link type='text/javascript' href='js/login.js'> 
+		<script type="text/javascript">
+			function submit() {
+				alert("got into submit() in register.html");	
+				var memberData ={
+					"name":document.getElementById("name").value,
+					"password":document.getElementById("password").value
+				};
+											
+				if(document.getElementById("password").value.equals(document.getElementById("passowordRetype").value)){
+					alert("passwords match should register member");
+					registerMember(memberData);
+				}
+			}
+			
+			function cancel () {
+				document.getElementById("name").value = "";
+				document.getElementById("password").value = "";
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="main-container">
+			<div id="heading-container">
+				<h1>Dist Sys and Web Tech</h1>
+				<div class='wrapper'>
+					<form class='alignleft' onclick="logout()"><input class='button' type='submit' value='Logout'/></form>				
+	
+					<a href='adminMenu.html'> <button class='button alignright'>Home Page</button></a>
+				</div>
+			</div>
+			<div id="inner-container">
+				<center>
+					<!-- For now mapping bean validation constraints from server side model is a manual task -->
+					<form name="reg" id="reg" data-ajax="false">
+						<fieldset>
+							<legend>Register a member:</legend>
+							<div>
+								<label for="name">Username:</label> 
+								<input type="text" name="name" id="name" placeholder="Username" required autofocus />
+							</div>
+							<br>
+							<div>
+								<label for="password">Password:</label> 
+								<input type="password" name="password" id="password" placeholder="User Password" required />
+							</div>
+							<br>
+							<div>
+								<label for="passwordRetype">Re-Enter Password:</label> 
+								<input type="password" name="passwordRetype" id="passwordRetype" placeholder="repeat password " required />
+							</div>
+							<br>
+							<p id="validate-status"></p>
+							<br>
+							<div data-role="controlgroup" data-type="horizontal">
+								<input type="submit" id="register" value="Register" /> 
+								<input type="button" name="cancel" id="cancel" value="Cancel" />
+							</div>
+							<br>
+							<div id="formMsgs"></div>
+						</fieldset>
+					</form>
+				</center>
+			</div>
+		</div>
+	</body>
+</html>

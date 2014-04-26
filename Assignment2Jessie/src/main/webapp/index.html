@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<meta content="en-ie" http-equiv="Content-Language">
+		<title>Assignment 2 DSS & Web Tech</title>
+		<link href="css/myStylesheet.css" rel="stylesheet" type="text/css">
+		<script src="js/app.js" type="text/javascript"></script>
+		<script src="js/login.js" type="text/javascript"></script>
+		<link rel="icon" type="image/ico" href="images/titleIco.ico">
+		<script>
+			function login(){
+				if(document.getElementById("name").value == ""){
+					alert("You may not leave name field blank!");	
+				}
+				if(document.getElementById("password").value == ""){
+					alert("You may not leave password field blank!");
+				}
+				else{
+					var name = document.getElementById("name").value;
+					var password = document.getElementById("password").value;
+					alert("Thanks, "+name);
+					pageRedirect(name, password);
+				}
+			}
+		</script>
+	</head>
+	
+	<body class="body">
+		<p class="logging">logout | <a href="register.html">Register</a></p>
+		<p id="heading">Assignment 2 - Jessica Ryan C08417024</p>
+		<p id="welcome" class="heading">To Do List Assignment 2 DSS and Web Tech</p>
+		<form class="form" id="myForm">
+			<label id="formLabel">Please enter your name: </label>
+			<input id="name" name="name" type="text" required="required"><br><br>
+			<label id="formLabel">Please enter your password: </label>
+			<input id="password" name="password" type="password" required="required"><br><br>
+			<input id="button" name="submit" type="submit" value="Submit" class="button">
+		</form>
+		<p id="navigation"><a href="index.html">Home</a></p>
+	</body>
+</html>

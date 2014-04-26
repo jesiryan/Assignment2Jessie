@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>Assignment2Jessie</groupId>
+    <artifactId>Assignment2Jessie</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>Assignment2Jessie</name>
+    <description>An Java EE 6 HTML5 mobile web application for use with JBoss.</description>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
+
+        <jboss.as.plugin.version>7.1.1.Final</jboss.as.plugin.version>
+
+        <jboss.bom.version>1.0.1.Final</jboss.bom.version>
+
+        <version.org.jboss.spec.jboss.javaee.6.0>3.0.0.Final</version.org.jboss.spec.jboss.javaee.6.0>
+        
+        <version.org.jboss.arquillian>1.0.0.Final</version.org.jboss.arquillian>
+
+        <version.org.hibernate-jpamodelgen>1.1.1.Final</version.org.hibernate-jpamodelgen>
+        <version.org.hibernate.validator>4.2.0.Final</version.org.hibernate.validator>
+
+        <version.junit>4.10</version.junit>
+        <version.org.eclipse.m2e>1.0.0</version.org.eclipse.m2e>
+        <version.ro.isdc.wro4j>1.4.4</version.ro.isdc.wro4j>
+
+        <version.compiler.plugin>2.3.1</version.compiler.plugin>
+        <version.license.plugin>1.9.0</version.license.plugin>
+        <version.surefire.plugin>2.4.3</version.surefire.plugin>
+        <version.war.plugin>2.2</version.war.plugin>
+
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-web-6.0</artifactId>
+                <version>${version.org.jboss.spec.jboss.javaee.6.0}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${version.org.hibernate.validator}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>${version.org.hibernate-jpamodelgen}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+	      	<scope>provided</scope>
+ 		</dependency>
+
+        <dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+        	<artifactId>jackson-jaxrs</artifactId>
+        	<version>1.9.13</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+        	<artifactId>jackson-core-lgpl</artifactId>
+        	<version>1.9.13</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+        	<artifactId>jackson-mapper-lgpl</artifactId>
+        	<version>1.9.13</version>
+        </dependency>
+        <dependency>
+        	<groupId>mysql</groupId>
+        	<artifactId>mysql-connector-java</artifactId>
+        	<version>5.1.29</version>
+        </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>        
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.war.plugin}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${jboss.as.plugin.version}</version>
+            </plugin>
+            
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>${version.license.plugin}</version>
+                <configuration>
+                    <header>src/etc/license.txt</header>
+                    <mapping>
+                        <tmpl>XML_STYLE</tmpl>
+                    </mapping>
+                    <strictCheck>true</strictCheck>
+                    <includes>
+                    <include>src/**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>src/main/webapp/js/libs/**</exclude>
+                        <exclude>src/main/webapp/css/jquery.mobile-1.0.min.css</exclude>
+                        <exclude>src/test/qunit/qunit/**</exclude>
+                        <exclude>src/main/webapp/tmpl/**</exclude>
+                        <exclude>src/main/webapp/WEB-INF/wro.properties</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.surefire.plugin}</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+</project>
