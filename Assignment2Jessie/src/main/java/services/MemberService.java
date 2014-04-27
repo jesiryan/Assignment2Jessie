@@ -46,29 +46,31 @@ public class MemberService {
 	@Inject
 	MemberRegistration registration;
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Member> listAllMembers() {
-//		System.out.println("||||||||||||Got in listAllMembers||||||||||||||||");
-//		return repository.findAllOrderedByName();
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Member> listAllMembers() {
+		System.out.println("||||||||||||Got in listAllMembers||||||||||||||||");
+		return repository.findAllOrderedByName();
+	}
 
-//	@GET
-//	@Path("/{id:[0-9][0-9]*}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Member lookupMemberById(@PathParam("id") long id) {
-//		System.out.println("||||||||||||Got in lookupMemberById||||||||||||||||");
-//		Member member = repository.findById(id);
-//		if (member == null) {
-//			throw new WebApplicationException(Response.Status.NOT_FOUND);
-//		}
-//		return member;
-//	}
+	@GET
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Member lookupMemberById(@PathParam("id") long id) {
+		System.out.println("||||||||||||Got in lookupMemberById||||||||||||||||");
+		Member member = repository.findById(id);
+		if (member == null) {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+		return member;
+	}
 	
 	@GET
 	@Path("/login")
+//	@Path("/login/{name}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String[] lookupMemberByNameAndPass(@QueryParam("name") String name,@QueryParam("password") String password) {
+//	public String[] lookupMemberByNameAndPass(@PathParam("name") String name,@PathParam("password") String password) {
 		System.out.println("||||||||||||Got in lookupMemberByNameAndPass||||||||||||||||");
 		return repository.getUserByNameAndPass(name,password);
 	}

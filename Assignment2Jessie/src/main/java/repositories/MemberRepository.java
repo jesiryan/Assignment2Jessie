@@ -46,8 +46,8 @@ public class MemberRepository {
     }
     
     public String[] getUserByNameAndPass(String name, String password){
-    	System.out.println("looking up: '" + name + "' with password: '" + password + "'");
-		String loginQueryString = "SELECT name, password, userType FROM Member WHERE name = ? and password=?";
+    	System.out.println("looking up: '" + name);
+		String loginQueryString = "SELECT name, password, dateJoined FROM Member WHERE name = ? and password=?";
 		String[] result = new String[3];
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
@@ -56,7 +56,7 @@ public class MemberRepository {
 			loginStatement.setString(2, password);
 			loginResultSet = loginStatement.executeQuery();		
 	
-			while (loginResultSet.next()) {			
+			while (loginResultSet.next()) {
 				result[0] = loginResultSet.getString(1);
 				result[1] = loginResultSet.getString(2);
 				result[2] = loginResultSet.getString(3);

@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +38,10 @@ public class Member implements Serializable {
 	@NotEmpty
 	private String password;
 	
+	@NotNull
+	@NotEmpty
+	private Date dateJoined;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Todo todo;
 
@@ -48,6 +53,7 @@ public class Member implements Serializable {
 	public Member(String name, String password){
 		this.name = name;
 		this.password = password;
+		this.dateJoined = new Date();
 	}
 	
 	public Long getId() {
@@ -72,6 +78,14 @@ public class Member implements Serializable {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getDateJoined() {
+		return dateJoined;
+	}
+
+	public void setDateJoined(Date dateJoined) {
+		this.dateJoined = dateJoined;
 	}
 
 }
