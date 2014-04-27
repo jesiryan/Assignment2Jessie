@@ -90,29 +90,6 @@ function registerMember(memberData) {
 
 /* TO DO STUFF */
 
-//function getUsersTodos() {
-////	alert("got in pageRedirect");
-//    $.ajax({
-//        url: "rest/todos",
-//        type: "GET",
-//        cache: false,
-//        success: function(data) {
-////        	alert("success");
-//        	if (data.length > 0) {
-//        		$('#info').empty();
-//        		alert(data[2]);
-//        		addCurrentUserToLocalStorage(data);
-//        		document.location.href = '/Assignment2Jessie/Home.html';
-//        	} else {
-//        		alert("Login for User: " + name + " failed. Please try again.");
-//            }
-//        },
-//        error: function(error) {
-//        	alert('login error');
-//        }
-//    });
-//}
-
 /* Get the todo template */
 function getTodoTemplate() {
 	$.ajax({
@@ -139,16 +116,12 @@ function updateTodoTable() {
 			$('#todos').empty().append(buildTodoRows(data));
 		},
 		error: function(error) {
-			//console.log("error updating table -" + error.status);
+			alert("error updating table -" + error.status);
 		}
 	});
 }
 
 function registerTodo(todoData) {
-	//clear existing  msgs
-	$('span.invalid').remove();
-	$('span.success').remove();
-
 	$.ajax({
 		url: 'rest/todos',
 		contentType: "application/json",
@@ -156,23 +129,21 @@ function registerTodo(todoData) {
 		type: "POST",
 		data: JSON.stringify(todoData),
 		success: function(data) {
-			//clear input fields
-			$('#reg')[0].reset();
-
 			//mark success on the registration form
-			$('#formMsgs').append($('<span class="success">Todo Registered</span>'));
+			$("#validate-status").text("");
+			$("#info").text("todo registered");
+			document.getElementById("info").style.color= "#000000";
+			return true;
 		},
 		error: function(error) {
-			if ((error.status == 409) || (error.status == 400)) {
-
-				var errorMsg = $.parseJSON(error.responseText);
-
-				$.each(errorMsg, function(index, val) {
-					$('#formMsgs').append($('<span class="invalid">' + val + '</span>').insertAfter($('#' + index)));
-				});
+			if(error.status == 409){
+				$("#info").text("Todo Taken");
+			} else if (error.status == 400) {
+				$("#info").text("Bad Request");
 			} else {
-				$('#formMsgs').append($('<span class="invalid">Unknown server error</span>'));
+				$("#info").text("unknown server error");
 			}
+			return false;
 		}
 	});
 }

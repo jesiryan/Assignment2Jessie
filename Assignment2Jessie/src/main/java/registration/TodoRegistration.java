@@ -22,6 +22,7 @@ public class TodoRegistration {
     private Event<Todo> todoEventSrc;
 
     public void register(Todo todo) throws Exception {
+    	System.out.println(todo.getDescription() + todo.getName() + todo.getId());
         log.info("Persisting " + todo.getName() + ", " + todo.getDescription());
         em.persist(todo);
         todoEventSrc.fire(todo);

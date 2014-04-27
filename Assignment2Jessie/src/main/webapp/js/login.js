@@ -15,22 +15,20 @@
 //            	alert("success");
             	if (data.length > 0) {
             		$('#info').empty();
-            		alert(data[2]);
             		addCurrentUserToLocalStorage(data);
             		document.location.href = '/Assignment2Jessie/Home.html';
             	} else {
-            		$("#info").text("Login for User: " + name + " failed. Please try again.");  
+            		$("#info").text("Login for user: " + name + " failed. Please try again.");  
             		document.getElementById("validate-status").style.color= "#CC0000";
-            		alert("Login for User: " + name + " failed. Please try again.");
                 }
             },
             error: function(error) {
             	alert('login error');
+            	$("#info").text("Login failed. Please try again.");
             }
         });
     }
-
-    
+	
     function addCurrentUserToLocalStorage(data) {
     	localStorage.setItem("currentUserName", data[0]);
     }

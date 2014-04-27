@@ -24,50 +24,33 @@
 					$("#info").text("You may not leave name field blank!"); 
 					return;	
 				}
-				if(document.getElementById("password").value == ""){
-					$("#info").text("You may not leave password field blank!");
-					return;
-				}
-				if(document.getElementById("passwordRetype").value == ""){
-					$("#info").text("You may not leave password field blank!");
-					return;
-				}
-				var tempName = document.getElementById("name").value;
-				if(hasNumbers(tempName)){
-					$("#info").text("name may not contain numbers");
+				if(document.getElementById("description").value == ""){
+					$("#info").text("You may not leave description field blank!");
 					return;
 				}
 				else{	
 					var name = document.getElementById("name").value;
-					var password = document.getElementById("password").value;
-					if(document.getElementById("password").value == document.getElementById("passwordRetype").value){
-						$("#validate-status").text("");
-						var memberData = {
-								"name":document.getElementById("name").value,
-								"password":document.getElementById("password").value
-							};
-						$("#info").text("registering member");
-						registerMember(memberData);
-						if(document.getElementById("info").value == "member registered"){
-							cancel();
-						}
+					var description = document.getElementById("description").value;
+					$("#validate-status").text("");
+					var currentUserName = localStorage.getItem("currentUserName", data[0]);
+					alert(member);
+					alert(currentUserName[0]);
+					var todoData = {
+							"name":document.getElementById("name").value,
+							"description":document.getElementById("description").value
+						};
+					$("#info").text("registering item");
+					registerTodo(todoData);
+					if(document.getElementById("info").value == "todo registered"){
+						cancel();
 					}
 				}
 			}
 
 			function cancel(){
 				document.getElementById("name").value = "";
-				document.getElementById("password").value = "";
-				document.getElementById("passwordRetype").value = "";
+				document.getElementById("description").value = "";
 				$("#info").text("");
-			}
-
-			function hasNumbers(name){
-				var result = name.search(/[0-9]/);
-				if(result != -1){
-					return true;
-				}
-				return false;
 			}
 			
 		</script>
@@ -78,14 +61,12 @@
 		<p id="heading">Assignment 2 - Jessica Ryan C08417024</p>
 		<p id="welcome" class="heading">To Do List Assignment 2 DSS and Web Tech</p>
 		<form class="form" id="myForm">
-			<label id="formLabel">Please enter your name: </label>
+			<label id="formLabel">Please enter name: </label>
 			<input id="name" name="name" type="text" placeholder="name" required="required"><br><br>
-			<label id="formLabel">Please enter your password: </label>
-			<input id="password" name="password" type="password"  placeholder="******" required="required"><br><br>
-			<label id="formLabel">Please re-enter your password: </label>
-			<input id="passwordRetype" name="passwordRetype" type="password"  placeholder="******" required="required"><br><br>
+			<label id="formLabel">Please enter description: </label>
+			<input id="description" name="description" type="text"  placeholder="description" required="required"><br><br>
 			<p id="validate-status"> </p>
-			<input id="registerButton" name="register" type="button" value="Register" class="button">
+			<input id="registerButton" name="register" type="button" value="Submit" class="button">
 			<input id="cancelButton" name="cancel" type="button" value="Cancel" class="button">
 			<p id="info"></p>
 		</form>

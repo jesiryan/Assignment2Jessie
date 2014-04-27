@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -37,9 +39,8 @@ public class Todo implements Serializable {
 	@NotEmpty
 	private String description;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="todo")
-	private List<Member> members;
+	@ManyToOne(fetch=FetchType.EAGER)
+	private Member member;
 	
 	public Todo(){
 		
@@ -72,6 +73,14 @@ public class Todo implements Serializable {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 }
