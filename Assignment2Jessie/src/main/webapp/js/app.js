@@ -1,7 +1,10 @@
 /* Password match */
 $(document).ready(function() {
 	$("#password").keyup(validate);
+	$("#password").keyup(clearInfo);
 	$("#passwordRetype").keyup(validate);
+	$("#passwordRetype").keyup(clearInfo);
+	$("#name").keyup(clearInfo);
 });
 function validate() {
 	var password = $("#password").val();
@@ -19,7 +22,9 @@ function validate() {
 		document.getElementById("validate-status").style.color= "#CC0000";
 	}
 }
-
+function clearInfo(){
+	$("#info").text("");
+}
 /* MEMBER STUFF */
 
 /* Get the member template */
@@ -68,8 +73,10 @@ function registerMember(memberData) {
 			return true;
 		},
 		error: function(error) {
-			if ((error.status == 409) || (error.status == 400)) {
-				$("#info").text("409 or 400 error");
+			if(error.status == 409){
+				$("#info").text("Name Taken");
+			} else if (error.status == 400) {
+				$("#info").text("Bad Request");
 			} else {
 				$("#info").text("unknown server error");
 			}

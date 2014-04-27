@@ -96,6 +96,11 @@ public class MemberService {
 			if(!repository.nameTaken(member.getName())){
 				registration.register(member);
 				builder = Response.ok();
+				return builder.build();
+			}
+			else{
+				builder = Response.status(Response.Status.CONFLICT).entity("Name Taken");
+				return builder.build();
 			}
 		} catch (ConstraintViolationException ce) {
 			builder = createViolationResponse(ce.getConstraintViolations());
