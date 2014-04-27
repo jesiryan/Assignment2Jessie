@@ -62,8 +62,9 @@ function registerMember(memberData) {
 		data: JSON.stringify(memberData),
 		success: function(data) {
 			//mark success on the registration form
-			$("#validate-status").text("user registered");  
-			document.getElementById("validate-status").style.color= "#000000";
+			$("#validate-status").text("");
+			$("#info").text("member registered");
+			document.getElementById("info").style.color= "#000000";
 		},
 		error: function(error) {
 			if ((error.status == 409) || (error.status == 400)) {
@@ -79,6 +80,29 @@ function registerMember(memberData) {
 
 
 /* TO DO STUFF */
+
+//function getUsersTodos() {
+////	alert("got in pageRedirect");
+//    $.ajax({
+//        url: "rest/todos",
+//        type: "GET",
+//        cache: false,
+//        success: function(data) {
+////        	alert("success");
+//        	if (data.length > 0) {
+//        		$('#info').empty();
+//        		alert(data[2]);
+//        		addCurrentUserToLocalStorage(data);
+//        		document.location.href = '/Assignment2Jessie/Home.html';
+//        	} else {
+//        		alert("Login for User: " + name + " failed. Please try again.");
+//            }
+//        },
+//        error: function(error) {
+//        	alert('login error');
+//        }
+//    });
+//}
 
 /* Get the todo template */
 function getTodoTemplate() {

@@ -75,19 +75,28 @@ public class MemberService {
 		return repository.getUserByNameAndPass(name,password);
 	}
 	
+	@GET
+	@Path("/register")
+//	@Path("/register/{name}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Boolean checkIfMemberExists(@QueryParam("name") String name) {
+//	public Boolean checkIfMemberExists(@PathParam("name") String name) {
+		System.out.println("||||||||||||Got in checkIfMemberExists||||||||||||||||");
+		return repository.nameTaken(name);
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createMember(Member member) {
 		System.out.println("||||||||||||Got in createMember||||||||||||||||");
+		System.out.println("member: "+ member.getName() + ", password: " + member.getPassword());
 		Response.ResponseBuilder builder = null;
-		
 		try {
-			validateMember(member);
-
-			registration.register(member);
-			
-			builder = Response.ok();
+			if(!repository.nameTaken(member.getName())){
+				registration.register(member);
+				builder = Response.ok();
+			}
 		} catch (ConstraintViolationException ce) {
 			builder = createViolationResponse(ce.getConstraintViolations());
 		} catch (ValidationException e) {
@@ -99,21 +108,7 @@ public class MemberService {
 			responseObj.put("error", e.getMessage());
 			builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
 		}
-
 		return builder.build();
-	}
-
-	private void validateMember(Member member) throws ConstraintViolationException, ValidationException {
-		Set<ConstraintViolation<Member>> violations = validator.validate(member);
-
-		if (!violations.isEmpty()) {
-			throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
-		}
-
-		//Check the uniqueness of the email address
-		if (userAlreadyExists(member.getName())) {
-			throw new ValidationException("Unique Username Violation");
-		}
 	}
 
 	private Response.ResponseBuilder createViolationResponse(Set<ConstraintViolation<?>> violations) {
@@ -126,15 +121,5 @@ public class MemberService {
 		}
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
-	}
-
-	public boolean userAlreadyExists(String name) {
-		Member member = null;
-		try {
-			member = repository.findByName(name);
-		} catch (NoResultException e) {
-			// ignore
-		}
-		return member != null;
 	}
 }

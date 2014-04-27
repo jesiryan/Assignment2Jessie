@@ -45,8 +45,28 @@ public class MemberRepository {
         return em.createQuery(criteria).getSingleResult();
     }
     
+    public Boolean nameTaken(String name){
+    	System.out.println("looking up: " + name);
+		String loginQueryString = "SELECT name FROM Member WHERE name = ?";
+		String result = "";
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, name);
+			loginResultSet = loginStatement.executeQuery();		
+			
+			while (loginResultSet.next()) {
+				result = loginResultSet.getString(1);
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return false;
+    }
+    
     public String[] getUserByNameAndPass(String name, String password){
-    	System.out.println("looking up: '" + name);
+    	System.out.println("looking up: " + name);
 		String loginQueryString = "SELECT name, password, dateJoined FROM Member WHERE name = ? and password=?";
 		String[] result = new String[3];
 		try {
@@ -55,7 +75,7 @@ public class MemberRepository {
 			loginStatement.setString(1, name);
 			loginStatement.setString(2, password);
 			loginResultSet = loginStatement.executeQuery();		
-	
+			
 			while (loginResultSet.next()) {
 				result[0] = loginResultSet.getString(1);
 				result[1] = loginResultSet.getString(2);

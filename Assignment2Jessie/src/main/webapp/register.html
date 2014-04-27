@@ -11,28 +11,56 @@
 		<link rel="icon" type="image/ico" href="images/titleIco.ico">
 		<script>
 //			alert("not broken yet");
-			function submit() {
-				alert("got into submit() in register.html");	
-				var memberData ={
-					"name":document.getElementById("name").value,
-					"password":document.getElementById("password").value
-				};
-				if(document.getElementById("password") != ""){
+			
+			function addButtonListeners(){
+				var registerButton = document.getElementById("registerButton");
+				registerButton.addEventListener("click", function(){ register(); }, false);
+				var cancelButton = document.getElementById("cancelButton");
+				cancelButton.addEventListener("click", function(){ cancel(); }, false);
+			}
+
+			function register(){
+				$("#info").text("submit button clicked");
+				//$("#info").text("");
+				if(document.getElementById("name").value == ""){
+					$("#info").text("You may not leave name field blank!"); 
+					return;	
+				}
+				if(document.getElementById("password").value == ""){
+					$("#info").text("You may not leave password field blank!");
+					return;
+				}
+				if(document.getElementById("passwordRetype").value == ""){
+					alert("You may not leave password field blank!");
+					$("#info").text("You may not leave password field blank!");
+					return;
+				}
+				else{
+					$("#info").text("Got to 'else'");	
+					var name = document.getElementById("name").value;
+					var password = document.getElementById("password").value;
 					if(document.getElementById("password").value == document.getElementById("passwordRetype").value){
-						alert("passwords match should register member");
+						$("#validate-status").text("");
+						var memberData = {
+								"name":document.getElementById("name").value,
+								"password":document.getElementById("password").value
+							};
+						$("#info").text("registering member");
 						registerMember(memberData);
 					}
 				}
 			}
-			
-			function cancel () {
+
+			function cancel(){
 				document.getElementById("name").value = "";
 				document.getElementById("password").value = "";
+				document.getElementById("passwordRetype").value = "";
+				$("#info").text("");
 			}
 		</script>
 	</head>
 	
-	<body class="body">
+	<body class="body" onload="addButtonListeners()">
 		<p class="logging">logout | <a href="register.html">Register</a></p>
 		<p id="heading">Assignment 2 - Jessica Ryan C08417024</p>
 		<p id="welcome" class="heading">To Do List Assignment 2 DSS and Web Tech</p>
@@ -42,12 +70,12 @@
 			<label id="formLabel">Please enter your password: </label>
 			<input id="password" name="password" type="password"  placeholder="******" required="required"><br><br>
 			<label id="formLabel">Please re-enter your password: </label>
-			<input id="passwordRetype" name="password" type="password"  placeholder="******" required="required"><br><br>
-			<p id="validate-status"></p>
-			<input id="button" name="submit" type="button" value="Submit" class="button" onclick="submit()">
-			<input id="buttonCancel" name="cancel" type="button" value="Cancel" class="button" onclick="cancel()">
+			<input id="passwordRetype" name="passwordRetype" type="password"  placeholder="******" required="required"><br><br>
+			<p id="validate-status"> </p>
+			<input id="registerButton" name="register" type="button" value="Register" class="button">
+			<input id="cancelButton" name="cancel" type="button" value="Cancel" class="button">
+			<p id="info"></p>
 		</form>
-		<div id="members"></div>
 		<p id="navigation"><a href="index.html">Home</a></p>
 	</body>
 </html>

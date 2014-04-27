@@ -17,7 +17,10 @@
             		$('#info').empty();
             		alert(data[2]);
             		addCurrentUserToLocalStorage(data);
+            		document.location.href = '/Assignment2Jessie/Home.html';
             	} else {
+            		$("#info").text("Login for User: " + name + " failed. Please try again.");  
+            		document.getElementById("validate-status").style.color= "#CC0000";
             		alert("Login for User: " + name + " failed. Please try again.");
                 }
             },
