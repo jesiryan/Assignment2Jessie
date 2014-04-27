@@ -1,7 +1,7 @@
 package services;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
@@ -89,8 +88,9 @@ public class MemberService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createMember(Member member) {
+		member.setDateJoined(new Date().toString());
 		System.out.println("||||||||||||Got in createMember||||||||||||||||");
-		System.out.println("member: "+ member.getName() + ", password: " + member.getPassword());
+		System.out.println("member: "+ member.getName() + ", password: " + member.getPassword() + ", dateJoined: " + member.getDateJoined());
 		Response.ResponseBuilder builder = null;
 		try {
 			if(!repository.nameTaken(member.getName())){

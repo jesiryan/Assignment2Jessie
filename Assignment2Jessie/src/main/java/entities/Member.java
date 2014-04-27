@@ -40,7 +40,7 @@ public class Member implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	private Date dateJoined;
+	private String dateJoined;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Todo todo;
@@ -53,7 +53,7 @@ public class Member implements Serializable {
 	public Member(String name, String password){
 		this.name = name;
 		this.password = password;
-		this.dateJoined = new Date();
+		this.dateJoined = new Date().toString();
 	}
 	
 	public Long getId() {
@@ -80,11 +80,11 @@ public class Member implements Serializable {
 		this.password = password;
 	}
 
-	public Date getDateJoined() {
+	public String getDateJoined() {
 		return dateJoined;
 	}
 
-	public void setDateJoined(Date dateJoined) {
+	public void setDateJoined(String dateJoined) {
 		this.dateJoined = dateJoined;
 	}
 

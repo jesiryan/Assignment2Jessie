@@ -40,7 +40,9 @@ public class MemberRegistration {
 
     public void register(Member member) throws Exception {
         log.info("Registering " + member.getName());
-        em.persist(member);
+        log.info("dateJoined: " + member.getDateJoined());
+//        em.persist(member);
+        em.merge(member);
         memberEventSrc.fire(member);
     }
 }

@@ -65,13 +65,15 @@ function registerMember(memberData) {
 			$("#validate-status").text("");
 			$("#info").text("member registered");
 			document.getElementById("info").style.color= "#000000";
+			return true;
 		},
 		error: function(error) {
 			if ((error.status == 409) || (error.status == 400)) {
-				alert("409 or 400 error");
+				$("#info").text("409 or 400 error");
 			} else {
-				alert("Unknown server error");
+				$("#info").text("unknown server error");
 			}
+			return false;
 		}
 	});
 }

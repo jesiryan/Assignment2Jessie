@@ -47,6 +47,9 @@
 							};
 						$("#info").text("registering member");
 						registerMember(memberData);
+						if(document.getElementById("info").value == "member registered"){
+							cancel();
+						}
 					}
 				}
 			}
