@@ -88,6 +88,29 @@ public class MemberRepository {
     	return null;   	
     }
     
+    public String[] getUserByName(String name){
+    	System.out.println("looking up: " + name);
+		String loginQueryString = "SELECT name, password, dateJoined, id FROM Member WHERE name = ?";
+		String[] result = new String[4];
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, name);
+			loginResultSet = loginStatement.executeQuery();		
+			
+			while (loginResultSet.next()) {
+				result[0] = loginResultSet.getString(1);
+				result[1] = loginResultSet.getString(2);
+				result[2] = loginResultSet.getString(3);
+				result[3] = loginResultSet.getString(4);
+				return result;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return null;   	
+    }
+    
     public List<Member> findAllOrderedByName() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Member> criteria = cb.createQuery(Member.class);

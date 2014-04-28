@@ -76,12 +76,32 @@ public class MemberService {
 	
 	@GET
 	@Path("/register")
-//	@Path("/register/{name}/{password}")
+//	@Path("/register/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Boolean checkIfMemberExists(@QueryParam("name") String name) {
 //	public Boolean checkIfMemberExists(@PathParam("name") String name) {
 		System.out.println("||||||||||||Got in checkIfMemberExists||||||||||||||||");
 		return repository.nameTaken(name);
+	}
+	
+	@GET
+	@Path("/getMember")
+//	@Path("/getMember/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Member getMemberByName(@QueryParam("name") String name) {
+//	public Member getMemberByName(@PathParam("name") String name) {
+		System.out.println("||||||||||||Got in getMemberByName||||||||||||||||");
+		String[] memberString = repository.getUserByName(name);
+		Member member = new Member();
+//		System.out.println("name" + memberString[0]);
+		member.setName(memberString[0]);
+//		System.out.println("password" + memberString[1]);
+		member.setPassword(memberString[1]);
+//		System.out.println("dateJoined" + memberString[2]);
+		member.setDateJoined(memberString[2]);
+//		System.out.println("id" + memberString[3]);
+		member.setId(Long.parseLong(memberString[3]));
+		return member;
 	}
 	
 	@POST

@@ -17,7 +17,7 @@
 				var cancelButton = document.getElementById("cancelButton");
 				cancelButton.addEventListener("click", function(){ cancel(); }, false);
 			}
-
+			
 			function register(){
 				$("#info").text("");
 				if(document.getElementById("name").value == ""){
@@ -32,12 +32,15 @@
 					var name = document.getElementById("name").value;
 					var description = document.getElementById("description").value;
 					$("#validate-status").text("");
-					var currentUserName = localStorage.getItem("currentUserName", data[0]);
-					alert(member);
-					alert(currentUserName[0]);
+					var currentUserName = localStorage.getItem("currentUserName");
+					alert(currentUserName);
+					var member = getMember(currentUserName);
+					alert("member: " + member);
+					alert("member.id: " + member.id);
 					var todoData = {
 							"name":document.getElementById("name").value,
-							"description":document.getElementById("description").value
+							"description":document.getElementById("description").value,
+							"member.id":member[4]
 						};
 					$("#info").text("registering item");
 					registerTodo(todoData);

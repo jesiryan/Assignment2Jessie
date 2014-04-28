@@ -85,6 +85,27 @@ function registerMember(memberData) {
 	});
 }
 	
+function getMember(memberName) {
+	alert("getMember(" + memberName + ");");
+	$.ajax({
+        url: "rest/members/getMember",
+        type: "GET",
+        cache: false,
+        data:{name: memberName},
+        success: function(data) {
+        	if (data.length > 0) {
+        		alert("has data");
+        		return data;
+        	} else {
+        		alert("null");
+            }
+        },
+        error: function(error) {
+        	alert('error');
+        }
+    });
+}
+
 
 
 
