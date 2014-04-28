@@ -16,6 +16,7 @@
 				registerButton.addEventListener("click", function(){ register(); }, false);
 				var cancelButton = document.getElementById("cancelButton");
 				cancelButton.addEventListener("click", function(){ cancel(); }, false);
+				loginLogout();
 			}
 
 			function register(){
@@ -74,9 +75,10 @@
 	</head>
 	
 	<body class="body" onload="addButtonListeners()">
-		<p class="logging">logout | <a href="register.html">Register</a></p>
+		<p class="logging"><div id="loginLogout" onclick="logout()"></div><a href="register.html">Register</a></p>
 		<p id="heading">Assignment 2 - Jessica Ryan C08417024</p>
 		<p id="welcome" class="heading">To Do List Assignment 2 DSS and Web Tech</p>
+		<p id="heading" class = "heading">Register User</p>
 		<form class="form" id="myForm">
 			<label id="formLabel">Please enter your name: </label>
 			<input id="name" name="name" type="text" placeholder="name" required="required"><br><br>

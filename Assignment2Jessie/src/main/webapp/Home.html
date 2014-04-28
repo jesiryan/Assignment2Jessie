@@ -11,16 +11,21 @@
 		<link rel="icon" type="image/ico" href="images/titleIco.ico">
 		<script>
 			var currentUserName = localStorage.getItem("currentUserName");
+			if(currentUserName == null){
+				logout();
+				return;
+			}
 			//getTodosGivenMemberName(currentUserName);
 			getTodoTemplate(currentUserName);
 		</script>
 	</head>
 	
-	<body class="body">
-		<p class="logging">logout | <a href="register.html">Register</a></p>
+	<body class="body" onload="loginLogout()">
+		<p class="logging"><div id="loginLogout" onclick="logout()"></div><a href="register.html">Register</a></p>
 		<p id="heading">Assignment 2 - Jessica Ryan C08417024</p>
 		<p id="welcome" class="heading">To Do List Assignment 2 DSS and Web Tech</p>
+		<p id="heading" class = "heading">Home Page</p>
 		<div id="todos"></div>
-		<p id="navigation"><a href="index.html">Home</a></p>
+		<p id="navigation"><a href="addTodo.html">Add item</a></p>
 	</body>
 </html>

@@ -41,3 +41,21 @@
     function clearUser() {
     	localStorage.clear();
     }
+    
+    function loginLogout(){
+    	var currentUserName = localStorage.getItem("currentUserName");
+		if(currentUserName == null){
+			$("#loginLogout").text("Login | ");
+			//document.getElementById("loginLogout").setAttribute("value", "login | ");
+			//document.getElementById("loginLogout").setAttribute("innerHTML", "login | ");
+			logout();
+			return;
+		}
+		else{
+			$("#loginLogout").text("Logout | ");
+			//document.getElementById("loginLogout").setAttribute("value", "logout | ");
+			//document.getElementById("loginLogout").setAttribute("innerHTML", "logout | ");
+			return;
+		}
+    }
+    
