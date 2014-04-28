@@ -45,6 +45,7 @@ public class TodoRepository {
 			connection = ConnectionFactory.getInstance().getConnection();
 			loginStatement = connection.prepareStatement(loginQueryString);
 			loginStatement.setString(1, ""+member.getId());
+			System.out.println("\"\"+member.getId() returns: '"+""+member.getId()+"'");
 			loginResultSet = loginStatement.executeQuery();		
 			List<Todo> todos = null;
 			while (loginResultSet.next()) {

@@ -31,7 +31,7 @@ public class Todo implements Serializable {
 
 	@NotNull
 	@Size(min = 1, max = 25, message = "1-25 letters and spaces")
-	@Pattern(regexp = "[A-Za-z ]*", message = "Only letters and spaces")
+//	@Pattern(regexp = "[A-Za-z ]*", message = "Only letters and spaces")
 	@Column(name = "name")
 	private String name;
 	
