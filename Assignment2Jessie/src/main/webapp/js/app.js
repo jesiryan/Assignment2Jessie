@@ -122,7 +122,7 @@ function getMemberAndRegisterTodo(memberName, todoName, todoDesc) {
         success: function(data) {
 //        	if (data.length > 0) {
         	if( data != null ){
-        		alert("has data");
+//        		alert("has data");
         		$("#info").text("todo registered");
         		return true;
         	} else {
@@ -146,7 +146,7 @@ function getMembersTodos(memberName, todoName, todoDesc) {
         success: function(data) {
 //        	if (data.length > 0) {
         	if( data != null ){
-        		alert("has data");
+//        		alert("has data");
         		$("#info").text("found todos");
         		return true;
         	} else {
@@ -161,17 +161,42 @@ function getMembersTodos(memberName, todoName, todoDesc) {
     });
 }
 
+function getTodosGivenMemberName(memberName) {
+	$.ajax({
+        url: "rest/members/getTodosGivenName",
+        type: "GET",
+        cache: false,
+        data:{name: memberName},
+        success: function(data) {
+//        	if (data.length > 0) {
+        	if( data != null ){
+        		alert("has data");
+        		$("#info").text("got todos");
+        		return true;
+        	} else {
+        		alert("null");
+        		$("#info").text("todo retrieval failed");
+            }
+        },
+        error: function(error) {
+        	alert('error');
+        	$("#info").text("error");
+        }
+    });
+}
+
+
 
 /* TO DO STUFF */
 
 /* Get the todo template */
-function getTodoTemplate() {
+function getTodoTemplate(memberName) {
 	$.ajax({
 		url: "tmpl/todo.tmpl",
 		dataType: "html",
 		success: function( data ) {
 			$( "head" ).append( data );
-			updateTodoTable();
+			updateTodoTable(memberName);
 		}
 	});
 }
@@ -182,10 +207,11 @@ function buildTodoRows(todos) {
 }
 
 /* Uses JAX-RS GET to retrieve current todo list */
-function updateTodoTable() {
+function updateTodoTable(memberName) {
 	$.ajax({
-		url: "rest/todos",
+		url: "rest/members/getTodosGivenName",
 		cache: false,
+		data:{name: memberName},
 		success: function(data) {
 			$('#todos').empty().append(buildTodoRows(data));
 		},
@@ -194,6 +220,20 @@ function updateTodoTable() {
 		}
 	});
 }
+
+///* Uses JAX-RS GET to retrieve current todo list */
+//function updateTodoTable() {
+//	$.ajax({
+//		url: "rest/todos",
+//		cache: false,
+//		success: function(data) {
+//			$('#todos').empty().append(buildTodoRows(data));
+//		},
+//		error: function(error) {
+//			alert("error updating table -" + error.status);
+//		}
+//	});
+//}
 
 function registerTodo(todoData) {
 	$.ajax({

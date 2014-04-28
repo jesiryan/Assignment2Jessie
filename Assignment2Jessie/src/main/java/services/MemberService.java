@@ -139,6 +139,13 @@ public class MemberService {
 		return null;
 	}
 	
+	@GET
+	@Path("/getTodosGivenName")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Todo> getTodosGivenMemberNameGET(@QueryParam("name") String name) {
+		return getTodosGivenMemberName(name);
+	}
+	
 	public Member getMember(String memberName){
 		System.out.println("||||||||||||Got in getMember||||||||||||||||");
 		String[] memberString = repository.getUserByName(memberName);
@@ -154,6 +161,16 @@ public class MemberService {
 		return member;
 	}
 	
+	public List<Todo> getTodosGivenMemberName(String name) {
+		Member member = getMember(name);
+		List<Todo> todos = todoRepository.findAllTodosByMember(member);
+		if(todos != null){
+			System.out.println("returning todos");
+			return todos;
+		}
+		System.out.println("couldn't find todo items");
+		return null;
+	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
