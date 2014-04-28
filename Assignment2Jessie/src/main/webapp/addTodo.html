@@ -34,22 +34,21 @@
 					$("#validate-status").text("");
 					var currentUserName = localStorage.getItem("currentUserName");
 					alert(currentUserName);
-					var member = getMember(currentUserName);
-					alert("member: " + member);
-					alert("member.id: " + member.id);
-					var todoData = {
-							"name":document.getElementById("name").value,
-							"description":document.getElementById("description").value,
-							"member.id":member[4]
-						};
+					
+					getMemberAndRegisterTodo(currentUserName, document.getElementById("name").value, document.getElementById("description").value);
+					
+					//var todoData = {
+					//		"name":document.getElementById("name").value,
+					//		"description":document.getElementById("description").value
+					//	};
 					$("#info").text("registering item");
-					registerTodo(todoData);
+					//registerTodo(todoData);
 					if(document.getElementById("info").value == "todo registered"){
 						cancel();
 					}
 				}
 			}
-
+			
 			function cancel(){
 				document.getElementById("name").value = "";
 				document.getElementById("description").value = "";

@@ -27,7 +27,9 @@ import javax.ws.rs.core.Response;
 
 import registration.MemberRegistration;
 import repositories.MemberRepository;
+import repositories.TodoRepository;
 import entities.Member;
+import entities.Todo;
 
 @Path("/members")
 @RequestScoped
@@ -42,6 +44,9 @@ public class MemberService {
 	@Inject
 	private MemberRepository repository;
 
+	@Inject
+	private TodoRepository todoRepository;
+	
 	@Inject
 	MemberRegistration registration;
 
@@ -91,18 +96,64 @@ public class MemberService {
 	public Member getMemberByName(@QueryParam("name") String name) {
 //	public Member getMemberByName(@PathParam("name") String name) {
 		System.out.println("||||||||||||Got in getMemberByName||||||||||||||||");
+//		return repository.getUserByName(name);
 		String[] memberString = repository.getUserByName(name);
 		Member member = new Member();
-//		System.out.println("name" + memberString[0]);
+		System.out.println("name: " + memberString[0]);
 		member.setName(memberString[0]);
-//		System.out.println("password" + memberString[1]);
+		System.out.println("password: " + memberString[1]);
 		member.setPassword(memberString[1]);
-//		System.out.println("dateJoined" + memberString[2]);
+		System.out.println("dateJoined: " + memberString[2]);
 		member.setDateJoined(memberString[2]);
-//		System.out.println("id" + memberString[3]);
+		System.out.println("id: " + memberString[3]);
 		member.setId(Long.parseLong(memberString[3]));
 		return member;
 	}
+	
+	@GET
+	@Path("/getMemberRegisterTodo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Todo getMemberRegisterTodo(@QueryParam("name") String name, @QueryParam("todoName") String todoName, @QueryParam("todoDesc") String todoDesc) {
+		Member member = getMember(name);
+		Todo todo = new Todo(todoName, todoDesc, member);
+		todoRepository.persistTodo(todo);
+		if(todoRepository.findByNameAndDescList(todoName, todoDesc) != null){
+			System.out.println("found it should return todo item");
+			return todo;
+		}
+		System.out.println("couldn't find todo item");
+		return null;
+	}
+	
+	@GET
+	@Path("/getMembersTodos")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Todo> getMembersTodos(@QueryParam("name") String name, @QueryParam("todoName") String todoName, @QueryParam("todoDesc") String todoDesc) {
+		Member member = getMember(name);
+		List<Todo> todos = todoRepository.findAllTodosByMember(member);
+		if(todos != null){
+			System.out.println("returning todos");
+			return todos;
+		}
+		System.out.println("couldn't find todo items");
+		return null;
+	}
+	
+	public Member getMember(String memberName){
+		System.out.println("||||||||||||Got in getMember||||||||||||||||");
+		String[] memberString = repository.getUserByName(memberName);
+		Member member = new Member();
+		System.out.println("name: " + memberString[0]);
+		member.setName(memberString[0]);
+		System.out.println("password: " + memberString[1]);
+		member.setPassword(memberString[1]);
+		System.out.println("dateJoined: " + memberString[2]);
+		member.setDateJoined(memberString[2]);
+		System.out.println("id: " + memberString[3]);
+		member.setId(Long.parseLong(memberString[3]));
+		return member;
+	}
+	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

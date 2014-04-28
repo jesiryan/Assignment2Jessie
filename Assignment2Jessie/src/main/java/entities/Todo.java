@@ -46,9 +46,10 @@ public class Todo implements Serializable {
 		
 	}
 	
-	public Todo(String name, String description){
+	public Todo(String name, String description, Member member){
 		this.name = name;
 		this.description = description;
+		this.member = member;
 	}
 	
 	public Long getId() {

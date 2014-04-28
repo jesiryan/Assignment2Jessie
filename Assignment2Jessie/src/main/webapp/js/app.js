@@ -86,7 +86,7 @@ function registerMember(memberData) {
 }
 	
 function getMember(memberName) {
-	alert("getMember(" + memberName + ");");
+	//alert("getMember(" + memberName + ");");
 	$.ajax({
         url: "rest/members/getMember",
         type: "GET",
@@ -94,10 +94,12 @@ function getMember(memberName) {
         data:{name: memberName},
         success: function(data) {
         	if (data.length > 0) {
-        		alert("has data");
-        		return data;
+        		//alert("has data");
+        		var member = JSON.stringify(eval("(" + data + ")"));
+        		//alert(eval("(" + member + ")"));
+        		return member;
         	} else {
-        		alert("null");
+        		//alert("null");
             }
         },
         error: function(error) {
@@ -107,6 +109,57 @@ function getMember(memberName) {
 }
 
 
+
+
+
+
+function getMemberAndRegisterTodo(memberName, todoName, todoDesc) {
+	$.ajax({
+        url: "rest/members/getMemberRegisterTodo",
+        type: "GET",
+        cache: false,
+        data:{name: memberName, todoName: todoName, todoDesc: todoDesc},
+        success: function(data) {
+//        	if (data.length > 0) {
+        	if( data != null ){
+        		alert("has data");
+        		$("#info").text("todo registered");
+        		return true;
+        	} else {
+        		alert("null");
+        		$("#info").text("todo failed");
+            }
+        },
+        error: function(error) {
+        	alert('error');
+        	$("#info").text("error");
+        }
+    });
+}
+
+function getMembersTodos(memberName, todoName, todoDesc) {
+	$.ajax({
+        url: "rest/members/getMembersTodos",
+        type: "GET",
+        cache: false,
+        data:{name: memberName, todoName: todoName, todoDesc: todoDesc},
+        success: function(data) {
+//        	if (data.length > 0) {
+        	if( data != null ){
+        		alert("has data");
+        		$("#info").text("found todos");
+        		return true;
+        	} else {
+        		alert("null");
+        		$("#info").text("todos not found");
+            }
+        },
+        error: function(error) {
+        	alert('error');
+        	$("#info").text("error");
+        }
+    });
+}
 
 
 /* TO DO STUFF */
