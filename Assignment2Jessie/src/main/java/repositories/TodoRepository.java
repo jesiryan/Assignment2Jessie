@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -47,11 +48,14 @@ public class TodoRepository {
 			loginStatement.setString(1, ""+member.getId());
 			System.out.println("\"\"+member.getId() returns: '"+""+member.getId()+"'");
 			loginResultSet = loginStatement.executeQuery();		
-			List<Todo> todos = null;
+			CopyOnWriteArrayList<Todo> todos = null;
+			Todo todo = null;
 			while (loginResultSet.next()) {
 				result[0] = loginResultSet.getString(1);
+				System.out.println(result[0]);
 				result[1] = loginResultSet.getString(2);
-				Todo todo = new Todo(result[0], result[1], member);
+				System.out.println(result[1]);
+				todo = new Todo(result[0], result[1], member);
 				todos.add(todo);
 			}
 			return todos;

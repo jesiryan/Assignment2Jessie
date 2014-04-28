@@ -56,7 +56,7 @@ public class MemberService {
 		System.out.println("||||||||||||Got in listAllMembers||||||||||||||||");
 		return repository.findAllOrderedByName();
 	}
-
+	
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
